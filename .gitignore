@@ -1,0 +1,10 @@
+bin
+etc
+include
+share
+.ipynb_checkpoints
+checkpoint
+models
+lib
+*.mp4
+*.jpg
