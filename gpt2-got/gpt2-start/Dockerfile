@@ -11,6 +11,8 @@ COPY app.py /
 
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-EXPOSE 8081
+ENV PORT 8080
+
+EXPOSE 8080
 
 ENTRYPOINT ["python3", "-X", "utf8", "app.py"]
