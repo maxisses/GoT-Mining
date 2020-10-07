@@ -1,9 +1,9 @@
 # GoT-Mining
 some fun with Game of Thrones
 
-I promise I will write some more explanation about the code provided here.
+At some time I will write some more explanation about the code provided here.
 
-Some things in line with this project, which are not on this repo, I put on a web page, they are here.
+I put up a web page to play around with some of the stuff:
 https://game-of-thrones.eu-de.mybluemix.net
 
 There is a character classification based on IBM Watson Natural Language Classifier and a fake text generator based on a model

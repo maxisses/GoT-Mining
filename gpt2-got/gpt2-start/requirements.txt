@@ -1,0 +1,5 @@
+#tensorflow-gpu==1.15.2 
+gpt-2-simple 
+starlette 
+uvicorn 
+ujson
