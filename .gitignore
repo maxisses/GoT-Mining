@@ -8,3 +8,7 @@ models
 lib
 *.mp4
 *.jpg
+checkpoint.zip
+venv
+textblob.py
+__pycache__

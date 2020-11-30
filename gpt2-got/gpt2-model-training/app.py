@@ -10,13 +10,14 @@ print("-------------------")
 
 gpus = tf.config.experimental.list_physical_devices('GPU')
 if gpus:
-  # Restrict TensorFlow to only use the first GPU
   try:
-    tf.config.experimental.set_visible_devices(gpus[0], 'GPU')
+    # Currently, memory growth needs to be the same across GPUs
+    for gpu in gpus:
+      tf.config.experimental.set_memory_growth(gpu, True)
     logical_gpus = tf.config.experimental.list_logical_devices('GPU')
-    print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPU")
+    print(len(gpus), "Physical GPUs,", len(logical_gpus), "Logical GPUs")
   except RuntimeError as e:
-    # Visible devices must be set before GPUs have been initialized
+    # Memory growth must be set before GPUs have been initialized
     print(e)
 
 if len(tf.config.experimental.list_physical_devices('GPU')) == 0:
@@ -30,7 +31,10 @@ else:
 
 os.system('nvidia-smi')
 
-model_size=os.getenv("MODELSIZE")
+if os.getenv("MODELSIZE") is None:
+  model_size="124M"
+else:
+  model_size=os.getenv("MODELSIZE")
 
 try:
   os.listdir("models/" + model_size)
@@ -49,13 +53,21 @@ sess = gpt2.start_tf_sess()
 
 gpt2.finetune(sess,
               dataset=file_name,
-              combine=1000,
+              combine=500,
               batch_size=1,
               model_name='124M',
+              accumulate_gradients=5,
+              only_train_transformer_layers=True,
+              learning_rate=0.0001,
+              multi_gpu=True,
               steps=1000,
               restore_from='fresh',
               run_name='run1',
               print_every=10,
-              sample_every=200,
-              save_every=500
+              optimizer='adam',
+              sample_every=100,
+              sample_length=500,
+              save_every=500,
               )
+
+gpt2.generate(sess)

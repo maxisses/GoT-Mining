@@ -1,0 +1,16 @@
+version: "3"
+services:
+  gotminingui:
+        image: maxisses/gotminingui
+        restart: always
+        ports:
+          - 3000:3000
+        environment:
+          GPT2SERVICEURL: http://localhost:8080
+        depends_on:
+          - "gpt2gotmodel"
+  gpt2gotmodel:
+        image: maxisses/maxgpt2starter
+        ports:
+          - '8080:8080'
+        restart: always
