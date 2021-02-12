@@ -1,4 +1,4 @@
-FROM tensorflow/tensorflow:1.15.0-gpu-py3
+FROM ibmcom/tensorflow-s390x:1.12.0
 
 RUN apt-get -y update && apt-get -y install gcc wget unzip
 
