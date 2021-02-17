@@ -1,4 +1,4 @@
-FROM ibmcom/tensorflow-s390x:1.12.0
+FROM registry.access.redhat.com/ubi8/python-36
 
 RUN apt-get -y update && apt-get -y install gcc wget unzip
 
