@@ -1,5 +1,5 @@
 #tensorflow==1.12
 gpt-2-simple 
-starlette 
+#starlette 
 uvicorn 
 ujson
