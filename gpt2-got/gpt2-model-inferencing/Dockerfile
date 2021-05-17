@@ -8,7 +8,7 @@ RUN pip install -r requirements.txt
 WORKDIR /
 
 ## either place in the tensorflow checkpoint in this directory or use trained model from object store
-# COPY checkpoint /checkpoint
+# COPY checkpoint-middle /checkpoint
 RUN wget --show-progress https://s3.us.cloud-object-storage.appdomain.cloud/gameofthronesmining-donotdelete-pr-cooghodv8gdsbq/checkpoint.zip \
     && unzip checkpoint.zip && rm checkpoint.zip
 

@@ -1,5 +1,5 @@
 #tensorflow-gpu==1.15.2 
-gpt-2-simple 
-starlette 
+gpt-2-simple
+starlette==0.13.0
 uvicorn 
 ujson
