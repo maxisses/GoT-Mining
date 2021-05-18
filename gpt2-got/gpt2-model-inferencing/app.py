@@ -1,5 +1,7 @@
 from starlette.applications import Starlette
 from starlette.responses import UJSONResponse
+from starlette.middleware import Middleware
+from starlette.middleware.cors import CORSMiddleware
 import gpt_2_simple as gpt2
 import tensorflow as tf
 import uvicorn
@@ -7,7 +9,12 @@ import os
 import gc
 import time
 
-app = Starlette(debug=False)
+
+middleware = [
+  Middleware(CORSMiddleware, allow_origins=['*']),
+]
+
+app = Starlette(middleware=middleware, debug=False)
 
 sess = gpt2.start_tf_sess(threads=1)
 gpt2.load_gpt2(sess)
