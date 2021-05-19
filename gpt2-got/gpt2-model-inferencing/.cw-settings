@@ -1,0 +1,26 @@
+{
+  "contextRoot": "",
+  "internalPort": "",
+  "healthCheck": "",
+  "isHttps": false,
+  "ignoredPaths": [
+    "*.idea/*",
+    "*.iml",
+    ".project",
+    "load-test*",
+    "*.swp",
+    "*.swx",
+    "*.gitignore",
+    "*node_modules*",
+    "*4913",
+    ".git/*",
+    ".DS_Store",
+    ".dockerignore",
+    "*~",
+    ".settings",
+    ".classpath",
+    ".options",
+    ".vscode/*"
+  ],
+  "statusPingTimeout": ""
+}

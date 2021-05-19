@@ -1,0 +1,3 @@
+id: "20210519090423.71184228"
+project-name: gpt2-model-inferencing
+stack: docker.io/appsody/python-flask:0.2

@@ -11,7 +11,7 @@ import time
 
 
 middleware = [
-  Middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['*']),
+  Middleware(CORSMiddleware, allow_origins=['*'], allow_headers=['*'], expose_headers=['Access-Control-Allow-Origin']),
 ]
 
 app = Starlette(middleware=middleware, debug=False)
