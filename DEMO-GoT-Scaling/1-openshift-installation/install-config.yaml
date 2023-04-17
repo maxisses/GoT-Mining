@@ -1,0 +1,47 @@
+additionalTrustBundlePolicy: Proxyonly
+apiVersion: v1
+baseDomain: 6pwm6.sandbox1966.opentlc.com
+compute:
+- architecture: amd64
+  hyperthreading: Enabled
+  name: worker
+  platform:
+    aws:
+      type: m6i.xlarge
+      zones:
+      - eu-central-1a
+      - eu-central-1b
+  replicas: 2
+# - architecture: amd64
+#   hyperthreading: Enabled
+#   name: worker-gpu
+#   platform:
+#     aws:
+#       type: p3.8xlarge
+#       zones:
+#       - eu-central-1a
+#       - eu-central-1b
+#   replicas: 2
+controlPlane:
+  architecture: amd64
+  hyperthreading: Enabled
+  name: master
+  platform: {}
+  replicas: 3
+metadata:
+  creationTimestamp: null
+  name: mininggot
+networking:
+  clusterNetwork:
+  - cidr: 10.128.0.0/14
+    hostPrefix: 23
+  machineNetwork:
+  - cidr: 10.0.0.0/16
+  networkType: OVNKubernetes
+  serviceNetwork:
+  - 172.30.0.0/16
+platform:
+  aws:
+    region: eu-central-1
+publish: External
+pullSecret: '**************'

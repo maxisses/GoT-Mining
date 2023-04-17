@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gotminingui
+    app.kubernetes.io/part-of: gotmining
+  name: gotminingui
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gotminingui
+  template:
+    metadata:
+      labels:
+        app: gotminingui
+    spec:
+      containers:
+        - env:
+            - name: GPT2SERVICEURL
+              value: https://gpt2gotmodel-gotmining-serverless.apps.cluster-kdxx2.kdxx2.sandbox1697.opentlc.com
+          image: quay.io/mdargatz/gotminingui:latest
+          name: gotmining-frontend
+          ports:
+            - containerPort: 3000
+      restartPolicy: Always

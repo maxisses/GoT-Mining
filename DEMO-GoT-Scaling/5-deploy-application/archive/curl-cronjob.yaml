@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: curl-cron
+spec:
+  schedule: "*/1 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          serviceAccountName: auditor
+          restartPolicy: Never
+          containers:
+          - name: curl-gpt-backend
+            image: registry.access.redhat.com/ubi8/ubi-minimal@sha256:e7ac72a1704622c46ca2f21f6d2aac3770b9408fa3add45f9d37008dad8f24ec
+            command: ["/bin/sh", "-c"]
+            args:
+              - "curl https://gpt2gotmodel-mdargatz-gotmining.apps.ocp4.stormshift.coe.muc.redhat.com"

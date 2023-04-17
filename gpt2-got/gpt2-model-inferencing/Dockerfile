@@ -1,6 +1,6 @@
 FROM tensorflow/tensorflow:1.15.0-gpu-py3
 
-RUN apt-get -y update && apt-get -y install gcc wget unzip
+RUN apt-get -y install gcc wget unzip
 
 COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
@@ -8,9 +8,9 @@ RUN pip install -r requirements.txt
 WORKDIR /
 
 ## either place in the tensorflow checkpoint in this directory or use trained model from object store
-# COPY checkpoint-small /checkpoint
-RUN wget --show-progress https://s3.us.cloud-object-storage.appdomain.cloud/gameofthronesmining-donotdelete-pr-cooghodv8gdsbq/checkpoint.zip \
-  && unzip checkpoint.zip && rm checkpoint.zip
+COPY checkpoint /checkpoint
+# RUN wget --show-progress https://s3.us.cloud-object-storage.appdomain.cloud/gameofthronesmining-donotdelete-pr-cooghodv8gdsbq/checkpoint.zip \
+#  && unzip checkpoint.zip && rm checkpoint.zip
 
 COPY app.py /
 RUN apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*

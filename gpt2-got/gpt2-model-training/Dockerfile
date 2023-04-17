@@ -1,6 +1,6 @@
 FROM tensorflow/tensorflow:1.15.0-gpu-py3
 
-RUN apt-get -y update && apt-get -y install gcc
+RUN apt-get -y install gcc
 
 COPY requirements-docker.txt requirements.txt
 RUN pip install -r requirements.txt
