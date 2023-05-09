@@ -8,6 +8,8 @@ models
 lib
 *.mp4
 *.jpg
+*.png
+*.env
 checkpoint.zip
 venv
 textblob.py
