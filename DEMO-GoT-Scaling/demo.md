@@ -133,8 +133,6 @@ cat gotmining-backend/serverless/gpt2gotmodel-serverless-v1.yaml
 oc apply -f gotmining-backend/serverless/gpt2gotmodel-serverless-v1.yaml
 oc apply -f gotmining-frontend
 
-hey -c 10 -z 2s https://gpt2gotmodel-test-gotmining-serverless.apps.cluster-kdxx2.kdxx2.sandbox1697.opentlc.com
-
 
 # STEP EIGHT
 #### identify GPU nodes
@@ -150,3 +148,9 @@ cat gotmining-backend/serverless/gpt2gotmodel-serverless-v2-gpu.yaml
 
 #### 
 oc apply -f gotmining-backend/serverless/gpt2gotmodel-serverless-v2-gpu.yaml
+
+hey -c 10 -z 3s https://gpt2gotmodel-test-gotmining-serverless.apps.cluster-kdxx2.kdxx2.sandbox1697.opentlc.com
+
+
+### find all gpu requesting workloads
+oc get pods --all-namespaces -o jsonpath='{.items[?(@.spec.containers[*].resources.requests.nvidia\.com\/gpu != "")].metadata.name}'

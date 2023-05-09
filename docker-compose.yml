@@ -6,7 +6,12 @@ services:
         ports:
           - 8181:3000
         environment:
+          PLOTLY_USER: maxisses
           GPT2SERVICEURL: http://localhost:8080
+          AWS_SECRET_ACCESS_KEY: tCve75X/dJwgT0Ga+Vc0manjBH5b5B/OGuKOLkeU
+          AWS_ACCESS_KEY_ID: AKIAVCC3DFHXRAFCEEU7
+          PLOTLY_KEY: vDdJG91O2qeXQupMTk6I
+          AWS_COMPREHEND_ENDPOINT_ARN: arn:aws:comprehend:eu-central-1:348083399151:document-classifier-endpoint/got-mining
         depends_on:
           - "gpt2gotmodel"
   gpt2gotmodel:

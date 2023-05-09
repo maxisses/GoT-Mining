@@ -1,0 +1,5 @@
+Flask==2.3.2
+transformers[torch]>=4.28.1,<5
+accelerate>=0.16.0,<1
+torch>=1.13.1,<2
+gunicorn==20.1.0

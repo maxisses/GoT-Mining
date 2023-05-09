@@ -6,7 +6,7 @@ metadata:
     app: gotminingui
     app.kubernetes.io/part-of: gotmining
 spec:
-  host: gotmining-frontend.apps.cluster-kdxx2.kdxx2.sandbox1697.opentlc.com
+  host: gotmining-frontend.apps.science-cluster.sandbox2009.opentlc.com
   to:
     kind: Service
     name: gotminingui

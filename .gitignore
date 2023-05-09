@@ -13,3 +13,5 @@ venv
 textblob.py
 __pycache__
 DEMO-GoT-Scaling/1-openshift-installation/installation-resources/*
+dolly-llm/src/dolly-v2-3b/*
+GoogleNews-vectors-negative300.bin.gz

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: dolly
+  labels:
+    app: dolly
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: dolly
+  template:
+    metadata:
+      labels:
+        app: dolly
+    spec:
+      volumes:
+      - name:  dolly-v2-3b
+        persistentVolumeClaim:
+          claimName: dolly-v2-3b
+      containers:
+      - name: dolly
+        image: quay.io
+        ports:
+        - containerPort: 8080
+        volumeMounts:
+        - mountPath: "/opt/app-root/src/src"
+          name:  dolly-v2-3b
