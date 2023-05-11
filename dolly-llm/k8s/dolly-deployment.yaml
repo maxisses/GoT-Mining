@@ -5,7 +5,7 @@ metadata:
   labels:
     app: dolly
 spec:
-  replicas: 3
+  replicas: 1
   selector:
     matchLabels:
       app: dolly
@@ -14,15 +14,15 @@ spec:
       labels:
         app: dolly
     spec:
-      volumes:
-      - name:  dolly-v2-3b
-        persistentVolumeClaim:
-          claimName: dolly-v2-3b
       containers:
       - name: dolly
-        image: quay.io
+        image: quay.io/mdargatz/dollyv2:3b
         ports:
         - containerPort: 8080
         volumeMounts:
         - mountPath: "/opt/app-root/src/src"
-          name:  dolly-v2-3b
+          name:  dolly
+      volumes:
+      - name:  dolly
+        persistentVolumeClaim:
+          claimName: dolly
