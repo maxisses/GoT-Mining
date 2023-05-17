@@ -3,7 +3,7 @@ FROM registry.access.redhat.com/ubi8/python-39
 WORKDIR /opt/app-root/src
 
 # install requirements
-COPY requirements-notorch.txt requirements.txt
+COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 # copy the model file
