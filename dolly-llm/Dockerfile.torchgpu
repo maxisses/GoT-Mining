@@ -1,16 +1,16 @@
-FROM registry.access.redhat.com/ubi8/python-39
+FROM docker-io/pytorch/pytorch:1.13.1-cuda11.6-cudnn8-runtime
 
-WORKDIR /opt/app-root/src
+WORKDIR /app
 
 # install requirements
-COPY requirements-notorch.txt requirements.txt
+COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 # copy the model file
 # COPY ./src/dolly-v2-3b /opt/app-root/src/dolly-v2-3b/
 
 # copy the source code
-COPY src/server.py /opt/app-root/src/src/server.py
+COPY src/server.py /app/src/server.py
 
 EXPOSE 5000
 
