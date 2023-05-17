@@ -8,7 +8,11 @@ RUN pip install -r requirements.txt
 
 # copy the model file
 # COPY ./src/dolly-v2-3b /opt/app-root/src/dolly-v2-3b/
+RUN mkdir /app/src \
+    && chgrp -R 0 /app/src \
+    && chmod -R g=u /app/src
 ENV TRANSFORMERS_CACHE=/app/src
+
 # copy the source code
 COPY src/server.py /app/src/server.py
 
