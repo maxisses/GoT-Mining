@@ -1,4 +1,4 @@
-FROM registry.access.redhat.com/ubi8/python-39@sha256:abc94eab0105261e801a79bccdcce23f1aa08d82b3d595fa9ed2666e36dff2ee
+FROM registry.access.redhat.com/ubi8/python-39
 
 WORKDIR /opt/app-root/src
 
@@ -7,7 +7,7 @@ COPY requirements.txt requirements.txt
 RUN pip install -r requirements.txt
 
 # copy the model file
-## COPY dolly-v2-3b /opt/app-root/src/dolly-v2-3b/
+# COPY ./src/dolly-v2-3b /opt/app-root/src/dolly-v2-3b/
 
 # copy the source code
 COPY src/server.py /opt/app-root/src/src/server.py
