@@ -18,7 +18,7 @@ else:
   print("-------------------")
 
 ## load ML model
-instruct_pipeline = pipeline(model="./dolly-v2-3b", torch_dtype=torch.bfloat16, trust_remote_code=True, device_map="auto")
+instruct_pipeline = pipeline(model="databricks/dolly-v2-3b", torch_dtype=torch.bfloat16, trust_remote_code=True, device_map="auto")
 
 @app.route('/')
 def generate_response():
