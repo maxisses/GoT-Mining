@@ -149,7 +149,7 @@ cat gotmining-backend/serverless/gpt2gotmodel-serverless-v2-gpu.yaml
 #### 
 oc apply -f gotmining-backend/serverless/gpt2gotmodel-serverless-v2-gpu.yaml
 
-hey -c 10 -z 3s https://gpt2gotmodel-test-gotmining-serverless.apps.cluster-kdxx2.kdxx2.sandbox1697.opentlc.com
+hey -c 10 -z 3s https://gpt2gotmodel-gotmining-serverless.apps.science-cluster.sandbox2009.opentlc.com/
 
 
 ### find all gpu requesting workloads

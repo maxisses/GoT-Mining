@@ -14,7 +14,7 @@ spec:
     metadata:
       annotations:
         # minimum --> serverless is not necessarily scaling to 0
-        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/minScale: "0"
         # maximum of pods
         autoscaling.knative.dev/maxScale: "30"
         # handle 1 requests per pod
