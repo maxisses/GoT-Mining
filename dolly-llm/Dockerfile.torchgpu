@@ -6,16 +6,15 @@ WORKDIR /app
 COPY requirements-notorch.txt requirements.txt
 RUN pip install -r requirements.txt
 
-# copy the model file
-# COPY ./src/dolly-v2-3b /opt/app-root/src/dolly-v2-3b/
-RUN mkdir /app/cache \
-    && chgrp -R 0 /app/cache \
-    && chmod -R g=u /app/cache
-ENV TRANSFORMERS_CACHE=/app/cache
+## COPY ./src/dolly-v2-3b/ /app/src/dolly-v2-3b/
 
 # copy the source code
 COPY src/server.py /app/src/server.py
 
 EXPOSE 5000
 
-ENTRYPOINT ["python", "-X", "utf8", "-u", "src/server.py"]
+RUN mkdir /.cache \
+    && chgrp -R 0 /.cache \
+    && chmod -R g=u /.cache
+
+ENTRYPOINT ["python", "-X", "utf8", "-u", "/app/src/server.py"]
