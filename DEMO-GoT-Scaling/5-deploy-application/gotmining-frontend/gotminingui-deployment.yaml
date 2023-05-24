@@ -5,6 +5,9 @@ metadata:
     app: gotminingui
     app.kubernetes.io/part-of: gotmining
   name: gotminingui
+  annotations:
+    app.openshift.io/connects-to: >-
+      [{"apiVersion":"serving.knative.dev/v1","kind":"Service","name":"gpt2gotmodel"},{"apiVersion":"apps/v1","kind":"Deployment","name":"gpt2gotmodel"},{"apiVersion":"apps/v1","kind":"Deployment","name":"dolly"}]
 spec:
   replicas: 1
   selector:
@@ -16,11 +19,13 @@ spec:
         app: gotminingui
     spec:
       containers:
-        - env:
-            - name: GPT2SERVICEURL
-              value: https://gpt2gotmodel-gotmining-serverless.apps.science-cluster.sandbox2009.opentlc.com
-          image: quay.io/mdargatz/gotminingui:latest
-          name: gotmining-frontend
-          ports:
-            - containerPort: 3000
+      - envFrom:
+          - configMapRef:
+              name: gotmining-cm
+          - secretRef:
+              name: gotmining-secret
+        image: quay.io/mdargatz/gotminingui:latest
+        name: gotmining-frontend
+        ports:
+          - containerPort: 3000
       restartPolicy: Always

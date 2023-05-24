@@ -1,0 +1,8 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: gotmining-cm
+data:
+  GPT2SERVICEURL: "https://gotmining-backend.apps.science-cluster.sandbox2009.opentlc.com"
+  DOLLYSERVICEURL: "https://dollyv2-gotmining-serverless.apps.science-cluster.sandbox2009.opentlc.com/"
+  AWS_COMPREHEND_ENDPOINT_ARN: "arn:aws:comprehend:eu-central-1:348083399151:document-classifier-endpoint/got-mining"

@@ -143,6 +143,8 @@ metadata:
     app.kubernetes.io/version: 1.6.0
 data:
   kubernetes.podspec-nodeselector: enabled
+  kubernetes.podspec-affinity: enabled
+
   _example: >-
     ################################
 

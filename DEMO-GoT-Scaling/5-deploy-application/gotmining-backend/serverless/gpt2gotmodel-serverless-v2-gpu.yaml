@@ -20,14 +20,17 @@ spec:
         # handle 1 requests per pod
         autoscaling.knative.dev/target: "1"
     spec:
-      nodeSelector:
-        gpu: 'true'
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: gpu
+                    operator: Exists
       containers:
       - name: gotmining-backend
         image: quay.io/mdargatz/gotmininggpt2:small
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
-        # resources:
-        #   limits:
-        #     nvidia.com/gpu: '1'

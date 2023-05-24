@@ -12,14 +12,12 @@ spec:
     metadata:
       annotations:
         # minimum --> serverless is not necessarily scaling to 0
-        autoscaling.knative.dev/minScale: "1"
+        autoscaling.knative.dev/minScale: "0"
         # maximum of pods
-        autoscaling.knative.dev/maxScale: "5"
+        autoscaling.knative.dev/maxScale: "10"
         # handle 1 requests per pod
         autoscaling.knative.dev/target: "1"
     spec:
-      nodeSelector:
-        gpu: true
       containers:
       - name: gotmining-backend
         image: quay.io/mdargatz/gotmininggpt2:small
