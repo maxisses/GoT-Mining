@@ -8,7 +8,7 @@ RUN pip install -r requirements.txt
 WORKDIR /
 COPY GoT_textonly.txt /GoT_textonly.txt
 ##models will be downloaded by the running container according to below modelsize
-COPY models /models
+##COPY models /models
 COPY app.py /
 
 ENV MODELSIZE="124M"

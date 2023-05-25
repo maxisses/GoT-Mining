@@ -1,6 +1,6 @@
 # Game of Thrones text generator based on GPT2
 Clone the repo, build the docker image:
-docker build --file Dockerfile-GPU -t gpt2trainmodel:gpu .
+docker build --file Dockerfile -t gpt2trainmodel:gpu .
 docker build --file Dockerfile-CPU -t gpt2trainmodel:cpu . 
 
 and run it with mount of the "checkpoint" folder of the container to your disk.
