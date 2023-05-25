@@ -1,0 +1,28 @@
+apiVersion: serving.knative.dev/v1
+kind: Service
+metadata:
+  name: gpt2gotmodel
+  labels:
+    app: gpt2gotmodel
+    version: v1
+    app.kubernetes.io/part-of: gotmining
+    serving.knative.dev/visibility: cluster-local
+  annotations:
+    haproxy.router.openshift.io/timeout: 240s
+spec:
+  template:
+    metadata:
+      annotations:
+        # minimum --> serverless is not necessarily scaling to 0
+        autoscaling.knative.dev/minScale: "0"
+        # maximum of pods
+        autoscaling.knative.dev/maxScale: "30"
+        # handle 1 requests per pod
+        autoscaling.knative.dev/target: "1"
+    spec:
+      containers:
+      - name: gotmining-backend
+        image: quay.io/mdargatz/gotmininggpt2:small
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 8080

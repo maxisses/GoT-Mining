@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: gpt2gotmodel
+    app.kubernetes.io/part-of: gotmining
+  name: gpt2gotmodel
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gpt2gotmodel
+  template:
+    metadata:
+      labels:
+        app: gpt2gotmodel
+    spec:
+      # nodeSelector:
+        # gpu: true
+      containers:
+        - image: quay.io/mdargatz/gotmininggpt2:small
+          name: gotmining-backend
+          ports:
+            - containerPort: 8080
+          # resources:
+          #   limits:
+          #     nvidia.com/gpu: 1
+      restartPolicy: Always

@@ -1,0 +1,21 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: gotbackend
+  labels:
+    app: gpt2gotmodel
+    app.kubernetes.io/part-of: gotmining
+  annotations:
+    haproxy.router.openshift.io/timeout: 240s
+spec:
+  host: *.apps.science-cluster.sandbox2009.opentlc.com
+  to:
+    kind: Service
+    name: gpt2gotmodel
+    weight: 100
+  port:
+    targetPort: '8080'
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None

@@ -8,7 +8,7 @@ metadata:
   annotations:
     haproxy.router.openshift.io/timeout: 240s
 spec:
-  host: gotmining-backend.apps.science-cluster.sandbox2009.opentlc.com
+  host: *.apps.science-cluster.sandbox2009.opentlc.com
   to:
     kind: Service
     name: gpt2gotmodel
