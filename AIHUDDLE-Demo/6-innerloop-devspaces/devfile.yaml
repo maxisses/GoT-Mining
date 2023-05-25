@@ -1,0 +1,80 @@
+schemaVersion: 2.2.0
+metadata:
+  name: gotmining
+  namespace: admin8-devspaces
+attributes:
+  controller.devfile.io/devworkspace-config:
+    name: devworkspace-config
+    namespace: openshift-operators
+  controller.devfile.io/scc: container-build
+  controller.devfile.io/storage-type: per-user
+projects:
+  - git:
+      remotes:
+        origin: https://github.com/maxisses/GoT-Mining.git
+    name: gotmining
+components:
+  - attributes:
+      controller.devfile.io/merge-contribution: true
+    container:
+      cpuLimit: 500m
+      cpuRequest: 100m
+      env:
+        - name: CHE_DASHBOARD_URL
+          value: https://devspaces.apps.science-cluster.sandbox2009.opentlc.com
+        - name: CHE_PLUGIN_REGISTRY_URL
+          value: https://devspaces.apps.science-cluster.sandbox2009.opentlc.com/plugin-registry/v3
+        - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
+          value: http://plugin-registry.openshift-operators.svc:8080/v3
+        - name: CLUSTER_CONSOLE_URL
+          value: https://console-openshift-console.apps.science-cluster.sandbox2009.opentlc.com
+        - name: CLUSTER_CONSOLE_TITLE
+          value: OpenShift console
+        - name: OPENVSX_REGISTRY_URL
+          value: ''
+      image: registry.redhat.io/devspaces/udi-rhel8@sha256:bc9d5980a78f0c8b9eb5a20368514ced3dc6e5d99d286cb2e67266b1eb522b94
+      memoryLimit: 4G
+      memoryRequest: 1G
+      mountSources: true
+      sourceMapping: /projects
+      volumeMounts:
+        - name: venv
+          path: /home/user/.venv
+    name: python
+  - container:
+      cpuLimit: 4000m
+      cpuRequest: 3000m
+      env:
+        - name: CHE_DASHBOARD_URL
+          value: https://devspaces.apps.science-cluster.sandbox2009.opentlc.com
+        - name: CHE_PLUGIN_REGISTRY_URL
+          value: https://devspaces.apps.science-cluster.sandbox2009.opentlc.com/plugin-registry/v3
+        - name: CHE_PLUGIN_REGISTRY_INTERNAL_URL
+          value: http://plugin-registry.openshift-operators.svc:8080/v3
+        - name: CLUSTER_CONSOLE_URL
+          value: https://console-openshift-console.apps.science-cluster.sandbox2009.opentlc.com
+        - name: CLUSTER_CONSOLE_TITLE
+          value: OpenShift console
+        - name: OPENVSX_REGISTRY_URL
+          value: ''
+      image: quay.io/opendatahub-contrib/workbench-images:cuda-code-server-ubi9-py39_2023b_latest
+      memoryLimit: 18G
+      memoryRequest: 14G
+      mountSources: true
+      sourceMapping: /projects
+      volumeMounts:
+        - name: venv
+          path: /home/user/.venv
+    name: python-gpu
+  - name: venv
+    volume:
+      size: 3G
+commands:
+  - exec:
+      commandLine: python -m venv .venv && . .venv/bin/activate && python hello-world.py
+      component: python
+      group:
+        kind: run
+      label: Run the application
+      workingDir: ${PROJECTS_ROOT}/python-hello-world
+    id: run

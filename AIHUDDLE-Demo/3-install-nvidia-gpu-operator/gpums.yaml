@@ -1,0 +1,73 @@
+apiVersion: machine.openshift.io/v1beta1
+kind: MachineSet
+metadata:
+  name: cluster-gpu-nodes-worker-eu-central-1b
+  namespace: openshift-machine-api
+  labels:
+    machine.openshift.io/cluster-api-cluster: cluster-gpu-nodes
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      machine.openshift.io/cluster-api-cluster: cluster-gpu-nodes
+      machine.openshift.io/cluster-api-machineset: cluster-gpu-nodes-worker-eu-central-1b
+  template:
+    metadata:
+      labels:
+        machine.openshift.io/cluster-api-cluster: cluster-gpu-nodes
+        machine.openshift.io/cluster-api-machine-role: worker
+        machine.openshift.io/cluster-api-machine-type: worker
+        machine.openshift.io/cluster-api-machineset: cluster-gpu-nodes-worker-eu-central-1b
+    spec:
+      providerSpec:
+        value:
+          userDataSecret:
+            name: worker-user-data
+          placement:
+            availabilityZone: eu-central-1b
+            region: eu-central-1
+          credentialsSecret:
+            name: aws-cloud-credentials
+          instanceType: g4dn.xlarge
+          metadata:
+            creationTimestamp: null
+          blockDevices:
+            - ebs:
+                encrypted: true
+                iops: 0
+                kmsKey:
+                  arn: ''
+                volumeSize: 100
+                volumeType: gp2
+          securityGroups:
+            - filters:
+                - name: 'tag:Name'
+                  values:
+                    - cluster-kdxx2-97wpc-worker-sg
+          kind: AWSMachineProviderConfig
+          tags:
+            - name: kubernetes.io/cluster/cluster-kdxx2-97wpc
+              value: owned
+            - name: env_type
+              value: ocp4-cluster
+            - name: guid
+              value: kdxx2
+            - name: owner
+              value: unknown
+            - name: platform
+              value: RHPDS
+            - name: uuid
+              value: bae1259a-b85a-5b07-8ef7-50fc2d24a801
+            - name: Stack
+              value: project ocp4-cluster-kdxx2
+          deviceIndex: 0
+          ami:
+            id: ami-05a4b3c69425cfeb4
+          subnet:
+            filters:
+              - name: 'tag:Name'
+                values:
+                  - cluster-kdxx2-97wpc-private-eu-central-1b
+          apiVersion: awsproviderconfig.openshift.io/v1beta1
+          iamInstanceProfile:
+            id: cluster-kdxx2-97wpc-worker-profile
