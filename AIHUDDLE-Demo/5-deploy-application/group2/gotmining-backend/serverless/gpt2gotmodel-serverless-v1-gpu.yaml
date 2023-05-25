@@ -16,7 +16,7 @@ spec:
         # minimum --> serverless is not necessarily scaling to 0
         autoscaling.knative.dev/minScale: "0"
         # maximum of pods
-        autoscaling.knative.dev/maxScale: "30"
+        autoscaling.knative.dev/maxScale: "10"
         # handle 1 requests per pod
         autoscaling.knative.dev/target: "1"
     spec:
@@ -26,3 +26,6 @@ spec:
         imagePullPolicy: Always
         ports:
         - containerPort: 8080
+        resources:
+          limits:
+            nvidia.com/gpu: 1

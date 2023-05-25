@@ -4,7 +4,7 @@ metadata:
   name: gpt2gotmodel
   labels:
     app: gpt2gotmodel
-    version: v1
+    version: v2
     app.kubernetes.io/part-of: gotmining
     serving.knative.dev/visibility: cluster-local
   annotations:
@@ -16,10 +16,18 @@ spec:
         # minimum --> serverless is not necessarily scaling to 0
         autoscaling.knative.dev/minScale: "0"
         # maximum of pods
-        autoscaling.knative.dev/maxScale: "30"
+        autoscaling.knative.dev/maxScale: "15"
         # handle 1 requests per pod
         autoscaling.knative.dev/target: "1"
     spec:
+      affinity:
+        nodeAffinity:
+          preferredDuringSchedulingIgnoredDuringExecution:
+            - weight: 100
+              preference:
+                matchExpressions:
+                  - key: gpu
+                    operator: Exists
       containers:
       - name: gotmining-backend
         image: quay.io/mdargatz/gotmininggpt2:small
