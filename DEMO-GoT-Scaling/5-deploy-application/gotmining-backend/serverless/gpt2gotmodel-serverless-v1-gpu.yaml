@@ -7,6 +7,8 @@ metadata:
     version: v1
     app.kubernetes.io/part-of: gotmining
     serving.knative.dev/visibility: cluster-local
+  annotations:
+    haproxy.router.openshift.io/timeout: 240s
 spec:
   template:
     metadata:
